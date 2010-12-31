@@ -25,7 +25,7 @@
 
             // Parse data
             try {
-                data = JSON.parse(orig.val()),
+                data = $.parseJSON(orig.val());
                 data = $.extend({}, defaults, data);
             } catch(ex) {
                 data = defaults;
