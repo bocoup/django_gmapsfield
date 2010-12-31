@@ -5,7 +5,7 @@ Django Google Maps Field is the most robust way to customize and display a Googl
 
 Its simple to install:
 
- #  python setup.py install
+    #  python setup.py install
 
 Simple to use:
 ==============
