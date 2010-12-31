@@ -1,7 +1,9 @@
 django_gmapsfield
 =================
 
-Django Google Maps Field is the most robust way to customize and display a Google Maps map.
+Django Google Maps Field is a robust way to customize and display a Google Map in Django, and use it as a UI for selecting/displaying location information in the Django admin.
+
+Developed By Tim Branyen, Bocoup LLC for Community Planit on behalf of Engagement Game Labs
 
 Features
 --------
@@ -24,6 +26,12 @@ Simple to use:
         'gmapsfield', # Make sure to register this
         ...
     )
+
+/urls.py
+--------
+
+    # Add this to serve correct admin js
+    (r'^admin/gmapsfield/public/(?P<file>.*)$', 'gmapsfield.views.serve'),
 
 /models.py
 ----------
