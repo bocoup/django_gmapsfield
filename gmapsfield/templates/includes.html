@@ -1,0 +1,65 @@
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script>
+~function(window, document) {
+    // Check for django global namespace
+    var django = window.django || {};
+
+    // Custom function to load jQuery and assign it to the django namespace
+    function load_jquery(url, callback) {
+        var script = document.createElement("script");
+        script.setAttribute("src", url);
+        document.documentElement.appendChild(script);
+        script.onload = function() {
+            // Remove all trace of jQuery from the global namespace
+            django.jQuery = jQuery.noConflict(true);
+            callback && callback();
+        };
+    }
+
+    function render_maps() {
+        django.jQuery(function($) {
+            // Reference to each map and reference clone
+            // Construct useful closure per map instance
+            var map = $(".google-map[data-value]").each(function(evt) {
+                var map = $(this),
+                    defaults = {
+                        zoom: 8,
+                        size: ["500px", "350px"],
+                        coordinates: [-34.397, 150.644]
+                    },
+                    // Merge the loaded values over the defaults
+                    data = $.extend({}, defaults, $.parseJSON(map.attr("data-value")));
+
+                // Set width/height
+                map.css({ width: data.size[0], height: data.size[1] });
+
+                // Assign coordinates
+                var coordinates = new google.maps.LatLng(data.coordinates[0], data.coordinates[1]),
+                    // Init the map
+                    gmap = new google.maps.Map(map[0], {
+                        zoom: data.zoom,
+                        center: coordinates,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    });
+                
+                // Add marker used for center positioning the map
+                var center = new google.maps.Marker({
+                    position: coordinates,
+                    map: gmap,
+                    draggable: true,
+                    title: "Centered Here"
+                });
+            });
+        });
+    }
+
+    // If jQuery exists, render maps
+    if(django.jQuery) {
+        render_maps();
+    }
+    // If jQuery does not exist, load 1.4.2 and assign to django.jQuery
+    else {
+        load_jquery("http://code.jquery.com/jquery-1.4.2.min.js", render_maps);
+    }
+}(this, this.document);
+</script>
