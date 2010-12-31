@@ -11,4 +11,7 @@ urlpatterns = patterns('',
     (r'^$', views.index),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
+
+    # Add this to serve correct admin js
+    (r'^admin/gmapsfield/public/(?P<file>.*)$', 'gmapsfield.views.serve'),
 )
