@@ -48,6 +48,9 @@ class GoogleMapsField(models.Field):
             # Size
             if mapdata.get("size"):
                 googlemap.size = mapdata.get("size")
+            # Zoom
+            if mapdata.get("zoom"):
+                googlemap.zoom = mapdata.get("zoom")
         except:
             mapdata = ""
 
