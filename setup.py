@@ -18,7 +18,6 @@ setup(
     author_email = 'tim@bocoup.com',
     packages = [
         'gmapsfield',
-        'gmapsfield.conf',
     ],
     package_data = {
         'gmapsfield': [
