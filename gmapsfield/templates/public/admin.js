@@ -8,7 +8,8 @@ django.jQuery(function($) {
             clone = orig.clone(true).attr("type", "hidden"),
             defaults = {
                 size: ["500px", "350px"],
-                coordinates: [-34.397, 150.644]
+                coordinates: [-34.397, 150.644],
+                zoom: 8
             };
 
         // Replace map with clone
@@ -35,7 +36,7 @@ django.jQuery(function($) {
         var coordinates = new google.maps.LatLng(data.coordinates[0], data.coordinates[1]),
             // Init the map
             gmap = new google.maps.Map(map[0], {
-                zoom: 8,
+                zoom: data.zoom,
                 center: coordinates,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
@@ -48,13 +49,18 @@ django.jQuery(function($) {
             title: "Centered Here"
         });
 
-        // Center map on marker drop
-        google.maps.event.addListener(center, "mouseup", function(evt) {
+        // Update function
+        function update(evt) {
             gmap.setCenter(center.position);
-            data.coordinates = [ center.position.va, center.position.wa ];
+            data.coordinates = [ center.position.lat(), center.position.lng() ];
+            data.zoom = gmap.zoom;
             clone.val( JSON.stringify(data) );
-        });
+        }
 
+        // Center map on marker drop
+        google.maps.event.addListener(center, "mouseup", update);
+        // When zoom changed
+        google.maps.event.addListener(gmap, "zoom_changed", update);
     });
 
 });
