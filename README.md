@@ -7,9 +7,7 @@ Developed By Tim Branyen, Bocoup LLC for Community Planit on behalf of Engagemen
 
 Features
 --------
-Currently the module allows for 
-
-Its simple to install:
+Its simple to install - use this command to upgrade as well:
 
     #  python setup.py install
 
