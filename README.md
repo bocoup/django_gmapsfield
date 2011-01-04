@@ -43,7 +43,9 @@ Or
 /urls.py
 --------
 
-    # Note: the following approach is non-standand, while it remains functional there are many disadvantages that django 1.3 static file handling will correct.
+    # Note: the following approach is non-standand, while it remains functional there are many disadvantages that django 1.3
+    # static file handling will correct.
+
     # Add this to serve correct admin js
     (r'^admin/gmapsfield/admin/(?P<file>.*)$', 'gmapsfield.views.serve'),
 
