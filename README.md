@@ -11,12 +11,12 @@ This project is currently under development and has not yet reached a beta phase
 as the host project work continues.
 
 So far several features exist:
-    * Custom admin site field.
-    * Custom public template filter
-    * Customizable properties:
-        - Zoom
-        - Width/Height
-        - Center coordinates
+* Custom admin site field.
+* Custom public template filter
+* Customizable properties:
+    - Zoom
+    - Width/Height
+    - Center coordinates
 
 Simple to use:
 ==============
