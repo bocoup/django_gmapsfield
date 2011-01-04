@@ -12,6 +12,7 @@ as the host project work continues.
 
 So far several features exist:
     * Custom admin site field.
+        - Specify a JSON-formatted defaults
     * Custom public template filter
     * Customizable properties:
         - Zoom
@@ -42,8 +43,11 @@ Or
 /urls.py
 --------
 
+    # Note: the following approach is non-standand, while it remains functional there are many disadvantages that django 1.3 static file handling will correct.
     # Add this to serve correct admin js
-    (r'^admin/gmapsfield/public/(?P<file>.*)$', 'gmapsfield.views.serve'),
+    (r'^admin/gmapsfield/admin/(?P<file>.*)$', 'gmapsfield.views.serve'),
+
+    # Optionally symlink this folder to your admin media path
 
 /models.py
 ----------
@@ -55,6 +59,9 @@ Or
     
     class Test(models.Model):
         map = GoogleMapsField()
+
+        # Can optionally specify defaults via JSON string
+        #map2 = GoogleMapsField(default="{ coordinates: [-40, 50], zoom: 10, size: [400, 200] }")
     
     admin.site.register(Test)
 
@@ -69,7 +76,7 @@ Or
     def index(request):
         template = loader.get_template("index.html")
     
-        # Grab the first map if one exists
+        # Grab the first map if one exists - for purposes of example 
         test = (Test.objects.all() and Test.objects.all()[0]) or { "map": { show: "No maps defined" } }
     
         return HttpResponse(template.render(RequestContext(request, {
@@ -87,3 +94,7 @@ Or
 
     <!-- Includes the necessary scripts on the page, place anywhere, but only once and do not forget! -->
     {% gmap_includes %}
+
+Development Notes:
+------------------
+1/04/11: Updated path to serve admin.js to be called admin instead of public.

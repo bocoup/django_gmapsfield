@@ -1,1 +1,5 @@
-<input class="google-map" type="text" name="{{ name }}" value="{{ value }}" type="text" />
+{% if value != None %}
+    <input class="google-map" type="text" name="{{ name }}" value="{{ value }}" type="text" /> <button class="remove-map">Remove Map</button>
+{% else %}
+    <button class="add-map" data-name="{{ name }}" data-value="{{ value }}">Add New Map</button>
+{% endif %}

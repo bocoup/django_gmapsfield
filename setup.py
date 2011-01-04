@@ -22,7 +22,7 @@ setup(
     package_data = {
         'gmapsfield': [
                 'templates/*.html',
-                'templates/public/*.js',
+                'templates/admin/*.js',
             ],
     },
     requires = [

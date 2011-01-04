@@ -1,8 +1,7 @@
 django.jQuery(function($) {
     
-    // Reference to each map and reference clone
     // Construct useful closure per map instance
-    var map = $(".google-map[type=text]").each(function(evt) {
+    $(".google-map[type=text]").live("initialize-map", function(evt) {
         var map, data,
             orig = $(this),
             clone = orig.clone(true).attr("type", "hidden"),
@@ -61,6 +60,20 @@ django.jQuery(function($) {
         google.maps.event.addListener(center, "mouseup", update);
         // When zoom changed
         google.maps.event.addListener(gmap, "zoom_changed", update);
+    });
+
+    // Reference to each map and reference clone
+    var map = $(".google-map[type=text]").each(function(evt) {
+        $(this).trigger("initialize-map");
+    });
+
+    $(".add-map").bind("click", function() {
+        var that = $(this),
+            widget = $("<input class='google-map' type='text' name='"+ that.attr("data-name") +"' value='"+ that.attr("data-value") +"' type='text' />");
+
+        that.replaceWith(widget);
+        widget.trigger("initialize-map");
+        return false;
     });
 
 });

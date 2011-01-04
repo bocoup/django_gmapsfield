@@ -9,6 +9,9 @@ def obj_to_string(obj):
     return dict((name, getattr(obj, name)) for name in dir(obj) if not name.startswith("__"))
 
 class GoogleMaps(object):
+    coordinates = None
+    size = None
+    zoom = None
 
     def __str__(self):
         return simplejson.dumps(obj_to_string(self))
@@ -20,11 +23,8 @@ class GoogleMapsField(models.Field):
     widget = GoogleMapsFormWidget
     
     # Initialization - apparently not needed
-    def __init__(self, *args, **kwargs):
-        self.coordinates = coordinates or [-34.397, 150.644]
-        self.size = size or [500, 350]
-        self.zoom = zoom or 5
-        super(GoogleMapsField, self).__init__(*args, **kwargs)
+    #def __init__(self, *args, **kwargs):
+    #    super(GoogleMapsField, self).__init__(*args)
 
     # Use TextField logic
     def get_internal_type(self):
