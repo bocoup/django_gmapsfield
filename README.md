@@ -7,12 +7,26 @@ Developed By Tim Branyen, Bocoup LLC for Community Planit on behalf of Engagemen
 
 Features
 --------
-Its simple to install - use this command to upgrade as well:
+This project is currently under development and has not yet reached a beta phase.  It should be treated and used as alpha within development environments.  Features will be added
+as the host project work continues.
 
-    #  python setup.py install
+So far several features exist:
+    * Custom admin site field.
+    * Custom public template filter
+    * Customizable properties:
+        - Zoom
+        - Width/Height
+        - Center coordinates
 
 Simple to use:
 ==============
+
+Installation
+-------------
+Its simple to install - use this command to upgrade as well:
+    #  python setup.py install
+Or
+    # easy_install django_gmapsfield
 
 /settings.py
 ------------
