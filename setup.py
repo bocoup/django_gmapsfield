@@ -8,10 +8,10 @@ README = read('README.md')
 
 setup(
     name = "django_gmapsfield",
-    version = "0.1",
-    url = 'http://github.com/mintchaos/django_compressor',
+    version = "alpha",
+    url = 'http://github.com/bocoup/django_gmapsfield',
     license = 'MIT and GPL',
-    description = "Compresses linked and inline javascript or CSS into a single cached file.",
+    description = "Django Google Maps Field is a robust way to customize and display a Google Map in Django, and use it as a UI for selecting/displaying location information in the Django admin.",
     long_description = README,
 
     author = 'Bocoup, LLC',
