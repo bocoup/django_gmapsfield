@@ -18,6 +18,7 @@ setup(
     author_email = 'tim@bocoup.com',
     packages = [
         'gmapsfield',
+        'gmapsfield.templatetags',
     ],
     package_data = {
         'gmapsfield': [
