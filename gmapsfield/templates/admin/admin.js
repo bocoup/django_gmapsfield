@@ -1,3 +1,4 @@
+// {{settings.GMAP_DEFAULT}}
 ~function(window, document) {
     var jQ = jQuery || (django && django.jQuery);
 
@@ -10,7 +11,7 @@
                 clone = orig.clone(true).attr("type", "hidden"),
                 defaults = {
                     size: ["500px", "350px"],
-                    coordinates: [-34.397, 150.644],
+                    coordinates: {{settings.GMAP_DEFAULT}},
                     zoom: 8
                 };
 

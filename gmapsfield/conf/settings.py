@@ -18,3 +18,4 @@ INSTALLED_APPS = (
 # Custom settings
 GMAP_JQUERY = getattr(settings, 'GMAP_JQUERY', 'http://code.jquery.com/jquery-1.4.2.min.js')
 GMAP_API = getattr(settings, 'GMAP_API', 'http://maps.google.com/maps/api/js?sensor=false')
+GMAP_DEFAULT = getattr(settings, 'GMAP_DEFAULT', [-34.397, 150.644])
