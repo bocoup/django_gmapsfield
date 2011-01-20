@@ -99,4 +99,5 @@ Or
 
 Development Notes:
 ------------------
-1/04/11: Updated path to serve admin.js to be called admin instead of public.
+* 1/04/11: Updated path to serve admin.js to be called admin instead of public.
+* 1/19/11: Two new settings added GMAP_JQUERY and GMAP_API which are string urls pointing to the respective resources.  Fixed bug with dumpdata.  Can now set global defaults in models via JSON.

@@ -5,7 +5,7 @@ from forms import GoogleMapsFormWidget
 from django.template import Context, loader
 
 # Convert obj to string
-def obj_to_string(obj):
+def filter_object(obj):
     return dict((name, getattr(obj, name)) for name in dir(obj) if not name.startswith("__"))
 
 class GoogleMaps(object):
@@ -14,7 +14,7 @@ class GoogleMaps(object):
     zoom = None
 
     def __str__(self):
-        return simplejson.dumps(obj_to_string(self))
+        return simplejson.dumps(filter_object(self))
  
 class GoogleMapsField(models.Field):
     """ Google Maps Representation """
@@ -59,11 +59,7 @@ class GoogleMapsField(models.Field):
 
     # Reverse of to_python
     def get_prep_value(self, obj):
-        return simplejson.dumps(obj_to_string(obj))
-
-    # Serialize to string
-    def value_to_string(self, obj):
-        return simplejson.dumps(obj_to_string(obj))
+        return simplejson.dumps(filter_object(obj))
 
     # Custom form field
     def formfield(self, **kwargs):
@@ -75,4 +71,4 @@ class GoogleMapsField(models.Field):
 
     # Default unicode function
     def __unicode__(self):
-        return simplejson.dumps(obj_to_string(obj))
+        return simplejson.dumps(filter_object(obj))

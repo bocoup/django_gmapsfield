@@ -1,3 +1,4 @@
+from gmapsfield.conf import settings
 from django import template
 register = template.Library()
 
@@ -8,7 +9,7 @@ def __init__():
 def show(value):
     t = template.loader.get_template("public.html")
     return t.render(template.Context({
-        "obj": str(value)
+        "obj": str(value),
     }))
 
 # Include scripts
@@ -22,7 +23,9 @@ class IncludesNode(template.Node):
 
     def render(self, context):
         t = template.loader.get_template("includes.html")
-        return t.render(template.Context())
+        return t.render(template.Context({
+            "settings": settings   
+        }))
 
 # Some point in the future it would be cool to show a map on demand with the config object
 @register.tag()
