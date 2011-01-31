@@ -12,7 +12,8 @@
                 defaults = {
                     size: ["500px", "350px"],
                     coordinates: {{settings.GMAP_DEFAULT}},
-                    zoom: 8
+                    zoom: 8,
+                    markers: []
                 };
 
             // Replace map with clone

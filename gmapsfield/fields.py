@@ -12,6 +12,7 @@ class GoogleMaps(object):
     coordinates = None
     size = None
     zoom = None
+    markers = None
 
     def __str__(self):
         return simplejson.dumps(filter_object(self))
@@ -52,6 +53,10 @@ class GoogleMapsField(models.Field):
             # Zoom
             if mapdata.get("zoom"):
                 googlemap.zoom = mapdata.get("zoom")
+            # Markers
+            if mapdata.get("markers"):
+                googlemap.markers = mapdata.get("markers")
+
         except:
             mapdata = ""
 

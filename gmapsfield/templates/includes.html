@@ -25,7 +25,8 @@
                     defaults = {
                         zoom: 8,
                         size: ["500px", "350px"],
-                        coordinates: [-34.397, 150.644]
+                        coordinates: [-34.397, 150.644],
+                        markers: []
                     },
                     // Merge the loaded values over the defaults
                     data = $.extend({}, defaults, $.parseJSON(map.attr("data-value")));
