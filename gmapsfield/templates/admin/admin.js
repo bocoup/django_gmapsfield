@@ -29,6 +29,11 @@
             try {
                 data = $.parseJSON(orig.val());
                 data = $.extend({}, defaults, data);
+                for(var i in data) {
+                    if(data[i] == null) {
+                        data[i] = defaults[i];
+                    }
+                }
             } catch(ex) {
                 data = defaults;
             }
@@ -53,11 +58,24 @@
                 title: "Centered Here"
             });
 
+            // Allow resizing
+            map.resizable({
+                maxHeight: 480,
+                maxWidth: 640,
+                minHeight: 120,
+                minWidth: 200,
+                resize: function() {
+                    google.maps.event.trigger(gmap, 'resize');
+                    update();
+                }
+            });
+
             // Update function
             function update(evt) {
                 gmap.setCenter(center.position);
                 data.coordinates = [ center.position.lat(), center.position.lng() ];
                 data.zoom = gmap.zoom;
+                data.size = [ map.width(), map.height() ];
                 clone.val( JSON.stringify(data) );
             }
 
@@ -72,12 +90,21 @@
             $(this).trigger("initialize-map");
         });
 
+        // Used to attach a map to the instance
         $(".add-map").bind("click", function() {
             var that = $(this),
                 widget = $("<input class='google-map' type='text' name='"+ that.attr("data-name") +"' value='"+ that.attr("data-value") +"' type='text' />");
 
             that.replaceWith(widget);
             widget.trigger("initialize-map");
+            return false;
+        });
+
+        // Used to remove a map from the instance
+        $(".remove-map").bind("click", function() {
+            var that = $(this);
+            $(".google-map").attr("value", "");
+
             return false;
         });
 

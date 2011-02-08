@@ -6,7 +6,7 @@ from django.template import Context, loader
 
 # Convert obj to string
 def filter_object(obj):
-    return dict((name, getattr(obj, name)) for name in dir(obj) if not name.startswith("__"))
+    return dict((name, getattr(obj, name)) for name in dir(obj) if not name.startswith('__'))
 
 class GoogleMaps(object):
     coordinates = None
@@ -18,14 +18,10 @@ class GoogleMaps(object):
         return simplejson.dumps(filter_object(self))
  
 class GoogleMapsField(models.Field):
-    """ Google Maps Representation """
-    description = "A Google Maps representation"
+    ''' Google Maps Representation '''
+    description = 'A Google Maps representation'
     __metaclass__ = models.SubfieldBase 
     widget = GoogleMapsFormWidget
-    
-    # Initialization - apparently not needed
-    #def __init__(self, *args, **kwargs):
-    #    super(GoogleMapsField, self).__init__(*args)
 
     # Use TextField logic
     def get_internal_type(self):
@@ -44,31 +40,38 @@ class GoogleMapsField(models.Field):
         try:
             mapdata = simplejson.loads(value)
 
+            # No data
+            if len(mapdata.keys()) == 0:
+                return None
+
             # Coordinates
-            if mapdata.get("coordinates"):
-                googlemap.coordinates = mapdata.get("coordinates")
+            if mapdata.get('coordinates'):
+                googlemap.coordinates = mapdata.get('coordinates')
             # Size
-            if mapdata.get("size"):
-                googlemap.size = mapdata.get("size")
+            if mapdata.get('size'):
+                googlemap.size = mapdata.get('size')
             # Zoom
-            if mapdata.get("zoom"):
-                googlemap.zoom = mapdata.get("zoom")
+            if mapdata.get('zoom'):
+                googlemap.zoom = mapdata.get('zoom')
             # Markers
-            if mapdata.get("markers"):
-                googlemap.markers = mapdata.get("markers")
+            if mapdata.get('markers'):
+                googlemap.markers = mapdata.get('markers')
 
         except:
-            mapdata = ""
+            googlemap = ''
 
         return googlemap
 
     # Reverse of to_python
     def get_prep_value(self, obj):
-        return simplejson.dumps(filter_object(obj))
+        try:
+            return simplejson.dumps(filter_object(obj))
+        except:
+            return ""
 
     # Custom form field
     def formfield(self, **kwargs):
-        # This is a fairly standard way to set up some defaults
+        # This is a standard way to set up some defaults
         # while letting the caller override them.
         defaults = { 'widget': GoogleMapsFormWidget }
         defaults.update(kwargs)
@@ -76,4 +79,5 @@ class GoogleMapsField(models.Field):
 
     # Default unicode function
     def __unicode__(self):
+        return ''
         return simplejson.dumps(filter_object(obj))
