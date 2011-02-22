@@ -13,6 +13,7 @@ class GoogleMaps(object):
     size = None
     zoom = None
     markers = None
+    frozen = None
 
     def __str__(self):
         return simplejson.dumps(filter_object(self))
@@ -56,6 +57,9 @@ class GoogleMapsField(models.Field):
             # Markers
             if mapdata.get('markers'):
                 googlemap.markers = mapdata.get('markers')
+            # Frozen
+            if mapdata.get('frozen'):
+                googlemap.frozen = mapdata.get('frozen')
 
         except:
             googlemap = ''

@@ -1,4 +1,3 @@
-// {{settings.GMAP_DEFAULT}}
 ~function(window, document) {
     var jQ = jQuery || (django && django.jQuery);
 
@@ -13,7 +12,8 @@
                     size: ["500px", "350px"],
                     coordinates: {{settings.GMAP_DEFAULT}},
                     zoom: 8,
-                    markers: []
+                    markers: [],
+                    frozen: false
                 };
 
             // Replace map with clone
@@ -79,6 +79,40 @@
                 clone.val( JSON.stringify(data) );
             }
 
+            // Used to attach a map to the instance
+            $(".add-map").bind("click", function() {
+                var that = $(this),
+                    widget = $("<input class='google-map' type='text' name='"+ that.attr("data-name") +"' value='"+ that.attr("data-value") +"' type='text' />");
+
+                that.replaceWith(widget);
+                widget.trigger("initialize-map");
+                return false;
+            });
+
+            // Used to remove a map from the instance
+            $(".remove-map").bind("click", function() {
+                var that = $(this);
+                $(".google-map").attr("value", "");
+
+                return false;
+            });
+
+            // Used to remove a map from the instance
+            $(".freeze-map").toggle(
+                function() {
+                    $(this).text("Unfreeze");
+                    data.frozen = true;
+
+                    return false;
+                },
+                function() {
+                    $(this).text("Freeze");
+                    data.frozen = false;
+
+                    return false;
+                }
+            );
+
             // Center map on marker drop
             google.maps.event.addListener(center, "mouseup", update);
             // When zoom changed
@@ -90,23 +124,6 @@
             $(this).trigger("initialize-map");
         });
 
-        // Used to attach a map to the instance
-        $(".add-map").bind("click", function() {
-            var that = $(this),
-                widget = $("<input class='google-map' type='text' name='"+ that.attr("data-name") +"' value='"+ that.attr("data-value") +"' type='text' />");
-
-            that.replaceWith(widget);
-            widget.trigger("initialize-map");
-            return false;
-        });
-
-        // Used to remove a map from the instance
-        $(".remove-map").bind("click", function() {
-            var that = $(this);
-            $(".google-map").attr("value", "");
-
-            return false;
-        });
 
     });
 }(this, this.document);
