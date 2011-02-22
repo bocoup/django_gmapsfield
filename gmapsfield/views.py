@@ -5,8 +5,11 @@ from gmapsfield.conf import settings
 def serve(request, file):
     if request.user.is_authenticated():
         t = loader.get_template('admin/'+ file)
-        return HttpResponse(t.render(Context({
+        response = HttpResponse(t.render(Context({
             "settings": settings
-        })))
+        })), mimetype='application/javascript')
+
+        response['Content-Type'] = 'application/javascript'
+        return response
     else:
         return HttpResponse(status=403)

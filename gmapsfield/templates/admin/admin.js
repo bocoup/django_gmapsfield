@@ -1,5 +1,5 @@
 ~function(window, document) {
-    var jQ = jQuery || (django && django.jQuery);
+    var jQ = window.jQuery || (window.django && window.django.jQuery);
 
     jQ(function($) {
         
@@ -37,6 +37,7 @@
             } catch(ex) {
                 data = defaults;
             }
+console.log('start');
 
             // Set width/height
             map.css({ width: data.size[0], height: data.size[1] });
@@ -80,6 +81,7 @@
             }
 
             // Used to attach a map to the instance
+            console.log('here');
             $(".add-map").bind("click", function() {
                 var that = $(this),
                     widget = $("<input class='google-map' type='text' name='"+ that.attr("data-name") +"' value='"+ that.attr("data-value") +"' type='text' />");
