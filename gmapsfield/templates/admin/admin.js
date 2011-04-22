@@ -4,7 +4,7 @@
     jQ(function($) {
         
         // Construct useful closure per map instance
-        $(".google-map[type=text]").live("initialize-map", function(evt) {
+        $(".google-map[type=text]").live("initialize-map", function(evt, data) {
             var map, data,
                 orig = $(this),
                 clone = orig.clone(true).attr("type", "hidden"),
@@ -15,6 +15,8 @@
                     markers: [],
                     frozen: false
                 };
+
+            defaults = $.extend({}, defaults, data);
 
             // Replace map with clone
             orig.replaceWith(clone);
@@ -121,9 +123,9 @@
 
         // Reference to each map and reference clone
         var map = $(".google-map[type=text]").each(function(evt) {
-            $(this).trigger("initialize-map");
+            var defaults = $(".defaults");
+            $(this).trigger("initialize-map", [defaults.attr('data')]);
         });
-
 
     });
 }(this, this.document);
