@@ -9,14 +9,16 @@
                 orig = $(this),
                 clone = orig.clone(true).attr("type", "hidden"),
                 defaults = {
-                    size: ["500px", "350px"],
+                    size: ["500px", "400px"],
                     coordinates: {{settings.GMAP_DEFAULT}},
                     zoom: 8,
                     markers: [],
                     frozen: false
                 };
 
+            console.log( 'before', defaults );
             defaults = $.extend({}, defaults, data);
+            console.log( 'after', defaults );
 
             // Replace map with clone
             orig.replaceWith(clone);
@@ -123,8 +125,9 @@
 
         // Reference to each map and reference clone
         var map = $(".google-map[type=text]").each(function(evt) {
-            var defaults = $(".defaults");
-            $(this).trigger("initialize-map", [defaults.attr('data')]);
+            var defaults = $(".defaults").val();
+            defaults && (defaults = $.parseJSON(defaults));
+            $(this).trigger("initialize-map", [defaults]);
         });
 
     });
