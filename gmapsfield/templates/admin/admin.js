@@ -16,9 +16,7 @@
                     frozen: false
                 };
 
-            console.log( 'before', defaults );
             defaults = $.extend({}, defaults, data);
-            console.log( 'after', defaults );
 
             // Replace map with clone
             orig.replaceWith(clone);
