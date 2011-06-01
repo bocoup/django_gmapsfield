@@ -85,3 +85,9 @@ class GoogleMapsField(models.Field):
     def __unicode__(self):
         return ''
         return simplejson.dumps(filter_object(obj))
+
+try:
+    from south.modelsinspector import add_introspection_rules
+    add_introspection_rules([], ["^gmapsfield\.fields\.GoogleMapsField"])
+except ImportError, e:
+    pass
