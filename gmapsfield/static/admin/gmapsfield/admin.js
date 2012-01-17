@@ -1,4 +1,4 @@
-~function(window, document) {
+(function(window, document) {
     var jQ = window.jQuery || (window.django && window.django.jQuery);
 
     jQ(function($) {
@@ -10,7 +10,7 @@
                 clone = orig.clone(true).attr("type", "hidden"),
                 defaults = {
                     size: ["500px", "400px"],
-                    coordinates: {{settings.GMAP_DEFAULT}},
+                    coordinates: [-44.185408825666336, -68.983685546875],
                     zoom: 8,
                     markers: [],
                     frozen: false
@@ -129,4 +129,4 @@
         });
 
     });
-}(this, this.document);
+})(this, this.document);
