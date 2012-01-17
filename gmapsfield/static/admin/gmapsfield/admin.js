@@ -41,7 +41,7 @@
             }
 
             // Set width/height
-            map.css({ width: data.size[0], height: data.size[1] });
+            map.css({ width: data.size[0], height: data.size[1], border: "1px solid #ccc" });
 
             // Assign coordinates
             var coordinates = new google.maps.LatLng(data.coordinates[0], data.coordinates[1]),
