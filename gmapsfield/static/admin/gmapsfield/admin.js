@@ -119,9 +119,8 @@
             google.maps.event.addListener(center, "mouseup", update);
             // When zoom changed
             google.maps.event.addListener(gmap, "zoom_changed", update);
-	    $(clone).data('map', map);
+	        $(clone).data('map', gmap);
             $(clone).data('marker', center);
-	    console.log(clone);
         });
 
         // Reference to each map and reference clone
