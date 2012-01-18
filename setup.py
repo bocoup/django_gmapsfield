@@ -8,14 +8,14 @@ README = read('README.md')
 
 setup(
     name = "django_gmapsfield",
-    version = "alpha",
-    url = 'http://github.com/bocoup/django_gmapsfield',
+    version = "beta",
+    url = 'http://github.com/D3f0/django_gmapsfield',
     license = 'MIT and GPL',
     description = "Django Google Maps Field is a robust way to customize and display a Google Map in Django, and use it as a UI for selecting/displaying location information in the Django admin.",
     long_description = README,
 
-    author = 'Bocoup, LLC',
-    author_email = 'tim@bocoup.com',
+    author = 'Bocoup, D3f0',
+    author_email = 'nahuel.defosse+django-github@gmail.com',
     packages = [
         'gmapsfield',
         'gmapsfield.conf',
@@ -25,6 +25,7 @@ setup(
         'gmapsfield': [
                 'templates/*.html',
                 'templates/admin/*.js',
+                'static/*',
             ],
     },
     requires = [
