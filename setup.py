@@ -25,7 +25,7 @@ setup(
         'gmapsfield': [
                 'templates/*.html',
                 'templates/admin/*.js',
-                'static/*',
+                'static/admin/gmapsfield/admin.js',
             ],
     },
     requires = [
