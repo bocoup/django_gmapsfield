@@ -18,7 +18,7 @@ INSTALLED_APPS = (
 # Alias 
 STATIC_URL = settings.STATIC_URL
 # Custom settings
-GMAP_JQUERY = getattr(settings, 'GMAP_JQUERY', 'http://code.jquery.com/jquery-1.4.2.min.js')
+GMAP_JQUERY = getattr(settings, 'GMAP_JQUERY', 'http://code.jquery.com/jquery-1.7.2.min.js')
 
 GMAP_JQUERY_UI = getattr(settings, 'GMAP_JQUERY_UI', 
                          'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js')
