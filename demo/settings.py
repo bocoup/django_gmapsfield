@@ -55,7 +55,7 @@ MEDIA_URL = ''
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '!6*(&t8r^+d1sn+%2y4$tp_tx3n4-0-m($3v=n=b(qqpi2d4zj'
@@ -87,9 +87,34 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
+    'django.contrib.staticfiles',
     'gmapsfield',
     'map',
 
     'django.contrib.admin',
     'django.contrib.admindocs',
 )
+# in apps' "static/" subdirectories and in STATICFILES_DIRS.
+STATIC_ROOT = 'static_files'
+STATIC_URL = '/static/'
+import os
+PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
+# Additional locations of static files
+STATICFILES_DIRS = (
+            # Put strings here, like "/home/html/static" or "C:/www/django/static".
+                # Always use forward slashes, even on Windows.
+                    # Don't forget to use absolute paths, not relative paths.
+                        os.path.join(PROJECT_PATH, 'static'),
+                        
+                        )
+
+
+# List of finder classes that know how to find static files in
+# various locations.
+STATICFILES_FINDERS = (
+            'django.contrib.staticfiles.finders.FileSystemFinder',
+                'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
+
+
