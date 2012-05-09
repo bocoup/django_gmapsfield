@@ -14,7 +14,8 @@ class GoogleMapsFormWidget(widgets.Widget):
         js = ('http://maps.google.com/maps/api/js?sensor=true', 
               settings.GMAP_JQUERY, 
               settings.GMAP_JQUERY_UI, 
-              settings.STATIC_URL + 'admin/gmapsfield/admin.js',)
+              settings.STATIC_URL + 'admin/gmapsfield/admin.js',
+              settings.STATIC_URL + 'admin/gmapsfield/json2.js',)
 
         css = {
             'all': (settings.GMAP_JQUERY_UI_CSS,),
